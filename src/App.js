@@ -1,6 +1,10 @@
 import "./app.css";
+import { useState } from "react";
+import Trivia from "./components/Trivia";
 
 function App() {
+  const [questionNumber, setQuestionNumber] = useState(1);
+
   const moneyPyramid = [
     {
       id: 1,
@@ -16,23 +20,23 @@ function App() {
     },
     {
       id: 4,
-      amount: "$ 1500",
+      amount: "$ 15000",
     },
     {
       id: 5,
-      amount: "$ 2000",
+      amount: "$ 20000",
     },
     {
       id: 6,
-      amount: "$ 2500",
+      amount: "$ 25000",
     },
     {
       id: 7,
-      amount: "$ 3000",
+      amount: "$ 30000",
     },
     {
       id: 8,
-      amount: "$ 35000",
+      amount: "$ 350000",
     },
     {
       id: 9,
@@ -40,26 +44,41 @@ function App() {
     },
     {
       id: 10,
-      amount: "$ 50000",
+      amount: "$ 500000",
     },
     {
       id: 11,
-      amount: "$ 80000",
+      amount: "$ 800000",
     },
     {
       id: 12,
       amount: "$ 10000000",
     },
-  ];
+  ].reverse();
   return (
     <div className="app">
-      <div className="main">Main</div>
+      <div className="main">
+        <div className="top">
+          <div className="timer">30</div>
+        </div>
+        <div className="bottom">
+          <Trivia />
+        </div>
+      </div>
       <div className="pyramid">
         <ul className="moneyList">
-          <li className="moneyListItem active">
-            <span className="moneyListItemNumber">4</span>
-            <span className="moneyListItemAmount">$ 400</span>
-          </li>
+          {moneyPyramid.map((m) => (
+            <li
+              className={
+                questionNumber === m.id
+                  ? "moneyListItem active"
+                  : "moneyListItem"
+              }
+            >
+              <span className="moneyListItemNumber">{m.id}</span>
+              <span className="moneyListItemAmount">{m.amount}</span>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
